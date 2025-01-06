@@ -18,6 +18,7 @@ return new class extends Migration
             $table->date('tanggal');
             $table->double('nominal');
             $table->double('saldo');
+            $table->string('kategori')->nullable();
             $table->enum('keterangan', ['setor', 'tarik']);
         });
     }

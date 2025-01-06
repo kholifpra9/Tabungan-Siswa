@@ -27,6 +27,7 @@
                             <th>Tanggal</th>
                             <th>Keterangan</th>
                             <th>Nominal</th>
+                            <th>Kategori</th>
                             <th>Saldo</th>
                             <th>Pencatat</th>
                         </tr>
@@ -38,6 +39,7 @@
                         <td>{{ $t->tanggal }}</td>
                         <td>{{ $t->keterangan }}</td>
                         <td>Rp.{{ number_format($t->nominal, 0, ',', '.') }}</td>
+                        <td>{{ !empty($t->kategori) ? $t->kategori : '-' }}</td>
                         <td>Rp.{{ number_format($t->saldo, 0, ',', '.') }}</td>
                         <td>{{ $t->user->name }}</td>
                     </tr>

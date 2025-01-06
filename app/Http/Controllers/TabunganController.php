@@ -104,6 +104,7 @@ class TabunganController extends Controller
             'user_id' => 'required',
             'tanggal' => 'required|date',
             'nominal' => 'required|numeric',
+            'kategori' => 'required',
             'keterangan' => 'required',
         ]);
 
@@ -142,6 +143,7 @@ class TabunganController extends Controller
             'nominal' => $validated['nominal'],
             'saldo' => $tabungan->saldo,
             'keterangan' => $validated['keterangan'],
+            'kategori' => $validated['kategori'],
         ]);
 
         $notification = [

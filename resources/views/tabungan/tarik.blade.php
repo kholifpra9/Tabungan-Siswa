@@ -38,6 +38,61 @@
                         </div>
 
                         <div class="max-w-xl">
+                            <x-input-label for="kategori" value="Kategori Penarikan" />
+                            <select id="kategori" name="kategori" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                <!-- Default: Kebutuhan Pribadi -->
+                                <option value="Kebutuhan Pribadi" {{ old('kategori', 'Kebutuhan Pribadi') == 'Kebutuhan Pribadi' ? 'selected' : '' }}>
+                                    Kebutuhan Pribadi
+                                </option>
+                                
+                                <!-- Penarikan Terkait Pendidikan -->
+                                <option value="Pembayaran Seragam" {{ old('kategori') == 'Pembayaran Seragam' ? 'selected' : '' }}>
+                                    Pembayaran Seragam
+                                </option>
+                                <option value="Pembayaran Buku LKS" {{ old('kategori') == 'Pembayaran Buku LKS' ? 'selected' : '' }}>
+                                    Pembayaran Buku LKS
+                                </option>
+                                <option value="Biaya Semester" {{ old('kategori') == 'Biaya Semester' ? 'selected' : '' }}>
+                                    Biaya Semester
+                                </option>
+                                <option value="Biaya Ujian" {{ old('kategori') == 'Biaya Ujian' ? 'selected' : '' }}>
+                                    Biaya Ujian
+                                </option>
+                                <option value="Pembayaran Buku Pelajaran" {{ old('kategori') == 'Pembayaran Buku Pelajaran' ? 'selected' : '' }}>
+                                    Pembayaran Buku Pelajaran
+                                </option>
+                                
+                                <!-- Acara Khusus -->
+                                <option value="Study Tour" {{ old('kategori') == 'Study Tour' ? 'selected' : '' }}>
+                                    Study Tour
+                                </option>
+                                <option value="Biaya Wisuda" {{ old('kategori') == 'Biaya Wisuda' ? 'selected' : '' }}>
+                                    Biaya Wisuda
+                                </option>
+                                <option value="Pendaftaran Lomba/Olimpiade" {{ old('kategori') == 'Pendaftaran Lomba/Olimpiade' ? 'selected' : '' }}>
+                                    Pendaftaran Lomba/Olimpiade
+                                </option>
+                                
+                                <!-- Infrastruktur -->
+                                <option value="Iuran Pembangunan" {{ old('kategori') == 'Iuran Pembangunan' ? 'selected' : '' }}>
+                                    Iuran Pembangunan
+                                </option>
+                                <option value="Renovasi Kelas" {{ old('kategori') == 'Renovasi Kelas' ? 'selected' : '' }}>
+                                    Renovasi Kelas
+                                </option>
+                                
+                                <!-- Kategori Lain -->
+                                <option value="Sumbangan" {{ old('kategori') == 'Sumbangan' ? 'selected' : '' }}>
+                                    Sumbangan
+                                </option>
+                                <option value="Kebutuhan Mendesak" {{ old('kategori') == 'Kebutuhan Mendesak' ? 'selected' : '' }}>
+                                    Kebutuhan Mendesak
+                                </option>
+                            </select>
+                        </div>
+
+
+                        <div class="max-w-xl">
                             <x-input-label for="keterangan" value="Keterangan" />
                             <x-text-input id="keterangan" type="text" readonly name="keterangan" class="mt-1 block w-full" 
                                         value="tarik" required />

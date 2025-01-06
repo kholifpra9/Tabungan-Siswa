@@ -12,7 +12,8 @@ class Transaksi extends Model
         'tanggal',
         'nominal',
         'saldo',
-        'keterangan'
+        'kategori',
+        'keterangan',
     ];
 
     public function user()

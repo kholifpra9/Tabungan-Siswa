@@ -86,7 +86,7 @@ class SiswaSeeder extends Seeder
                          'user_id' => '2',
                          'tanggal' => $faker->dateTimeBetween('-1 months', 'now')->format('Y-m-d'),
                          'nominal' => $nominal,
-                         'saldo' => $initialSaldo, 
+                         'saldo' => $initialSaldo,
                          'keterangan' => 'setor',
                      ]);
                  }
