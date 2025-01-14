@@ -40,10 +40,10 @@
                         <div class="max-w-xl">
                             <x-input-label for="kategori" value="Kategori Penarikan" />
                             <select id="kategori" name="kategori" class="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring focus:ring-indigo-200 focus:ring-opacity-50" required>
+                                <!-- Opsi kosong -->
+                                <option value="" selected disabled>Pilih Kategori</option>
+                                
                                 <!-- Default: Kebutuhan Pribadi -->
-                                <option value="Kebutuhan Pribadi" {{ old('kategori', 'Kebutuhan Pribadi') == 'Kebutuhan Pribadi' ? 'selected' : '' }}>
-                                    Kebutuhan Pribadi
-                                </option>
                                 
                                 <!-- Penarikan Terkait Pendidikan -->
                                 <option value="Pembayaran Seragam" {{ old('kategori') == 'Pembayaran Seragam' ? 'selected' : '' }}>
@@ -85,12 +85,15 @@
                                 <option value="Sumbangan" {{ old('kategori') == 'Sumbangan' ? 'selected' : '' }}>
                                     Sumbangan
                                 </option>
-                                <option value="Kebutuhan Mendesak" {{ old('kategori') == 'Kebutuhan Mendesak' ? 'selected' : '' }}>
-                                    Kebutuhan Mendesak
-                                </option>
                             </select>
-                        </div>
 
+                        </div>
+                        
+                        <div class="max-w-xl">
+                            <x-input-label for="detail_penarikan" value="Detail Penarikan" />
+                            <x-text-input id="detail_penarikan" type="text" placeholder="Masukan Detail Penarikan (opsional)" name="detail_penarikan" class="mt-1 block w-full" />
+                            <x-input-error class="mt-2" :messages="$errors->get('detail_penarikan')" />
+                        </div>
 
                         <div class="max-w-xl">
                             <x-input-label for="keterangan" value="Keterangan" />

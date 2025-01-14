@@ -16,11 +16,11 @@ class PdfController extends Controller
         $siswa = Siswa::with('kelas')->get();
         $data = [
             'title' => 'Data Siswa Tabungan',
-            'date' => date('m/d/Y'),
             'siswa' => $siswa
         ]; 
         $pdf = FacadePdf::loadview('pdf.siswa-print', $data);
         return $pdf->download('Cetak Siswa.pdf');
+        // return view('pdf.siswa-print', $data);
     }
 
     public function kelasPrint(Kelas $kelas)
@@ -29,7 +29,6 @@ class PdfController extends Controller
 
         $data = [
             'title' => 'Data Siswa Tabungan Per Kelas, ' . str_replace(' ', '_', $kelas->nama_kelas),
-            'date' => date('m/d/Y'),
             'siswa' => $siswa,
             'kelas' => $kelas
         ];
@@ -56,6 +55,27 @@ class PdfController extends Controller
 
         $pdf = FacadePdf::loadView('pdf.siswa-riwayat-print', $data);
         $filename = 'Cetak_Tabungan_' . str_replace(' ', '_', $siswa->nama) . '.pdf';
+        return $pdf->download($filename);
+    }
+
+    public function keseluruhanPrint()
+    {
+        // Ambil seluruh data siswa dengan relasi kelas dan tabungan
+        $siswa = Siswa::with(['kelas', 'tabungan'])->get();
+
+        // Kelompokkan siswa berdasarkan kelas
+        $kelasData = $siswa->groupBy(function ($item) {
+            return $item->kelas?->nama_kelas ?? 'Tidak Ada Kelas';
+        });
+
+        // Siapkan data untuk PDF
+        $data = [
+            'title' => 'Data Tabungan Siswa Per Kelas',
+            'kelasData' => $kelasData,
+        ];
+
+        $pdf = FacadePdf::loadview('pdf.keseluruhan-tabungan-print', $data);
+        $filename = 'Cetak_keseluruhan_Tabungan.pdf';
         return $pdf->download($filename);
     }
 }

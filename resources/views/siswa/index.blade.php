@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -17,40 +17,36 @@
                     <br>
                     <x-table>
                         <x-slot name="header">
-                            <tr>
-                                <th>No</th>
-                                <th>NIS</th>
-                                <th>Nama Siswa</th>
-                                <th>Kelas</th>
-                                <th>Tanggal Lahir</th>
-                                <th>Aksi</th>
-                            </tr>
+                            <th class=" border-l border-transparent">No</th>
+                            <th class="">NIS</th>
+                            <th class="">Nama Siswa</th>
+                            <th class="">Kelas</th>
+                            <th class="">Tanggal Lahir</th>
+                            <th class=" border-r border-transparent">Aksi</th>
                         </x-slot>
-                        @php $num=1 @endphp
+                        @php $num = 1; @endphp
                         @foreach($siswas as $s)
-                        <tr>
-                            <td>{{$num++}}</td>
-                            <td>{{$s->nis}}</td>
-                            <td>{{$s->nama}}</td>
-                            <td>{{$s->kelas->nama_kelas}}</td>
-                            <td>{{$s->tanggal_lahir}}</td>
-                          
-                            <td>
-                                <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'siswa-detail'); $dispatch('load-siswa-detail', {{$s->nis}})"> 
-                                    {{ __('Detail') }}
-                                </x-primary-button>
-                                @if(auth()->user()->hasRole('admin'))
-                                <x-primary-button tag="a" href="{{ route('siswa.edit', $s->nis) }}">Edit</x-primary-button>
-                                <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal',
-                                    'confirm-siswa-deletion')" x-on:click="$dispatch('set-action',
-                                    '{{ route('siswa.destroy', $s->nis) }}')"> {{ __('Delete')}}
-                                </x-danger-button>
-                                @endif
-                            </td>
-                        </tr>
-                     
+                            <tr>
+                                <td class="bg-[#F3F6FF]">{{ $num++ }}</td>
+                                <td class="bg-white">{{ $s->nis }}</td>
+                                <td class="bg-[#F3F6FF]">{{ $s->nama }}</td>
+                                <td class="bg-white">{{ $s->kelas->nama_kelas }}</td>
+                                <td class="bg-[#F3F6FF]">{{ $s->tanggal_lahir }}</td>
+                                <td class="bg-white">
+                                    <x-primary-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'siswa-detail'); $dispatch('load-siswa-detail', {{$s->nis}})">
+                                        {{ __('Detail') }}
+                                    </x-primary-button>
+                                    @if(auth()->user()->hasRole('admin'))
+                                        <x-primary-button class="bg-yellow-500" tag="a" href="{{ route('siswa.edit', $s->nis) }}">Edit</x-primary-button>
+                                        <x-danger-button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-siswa-deletion')" x-on:click="$dispatch('set-action', '{{ route('siswa.destroy', $s->nis) }}')">
+                                            {{ __('Delete') }}
+                                        </x-danger-button>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                     </x-table>
+
                 </div>
             </div>
         </div>

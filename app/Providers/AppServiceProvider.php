@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\Kelas;
 use App\Models\Siswa;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\View as FacadesView;
 use Illuminate\Support\ServiceProvider;
@@ -23,6 +24,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Carbon::setLocale('id');
         FacadesView::composer('dashboard', function ($view) {
             $jumlah_kelas1 = Siswa::where('kelas_id', 1)->count();
             $jumlah_kelas2 = Siswa::where('kelas_id', 2)->count();

@@ -105,17 +105,19 @@ class TabunganController extends Controller
             'tanggal' => 'required|date',
             'nominal' => 'required|numeric',
             'kategori' => 'required',
+            'detail_penarikan' => 'nullable',
             'keterangan' => 'required',
         ]);
 
-        $existingTransaction = Transaksi::where('tabungan_id', $request->tabungan_id)
+        // Periksa jumlah transaksi tarik tunai untuk hari yang sama
+        $existingTransactionsCount = Transaksi::where('tabungan_id', $request->tabungan_id)
             ->whereDate('tanggal', date('Y-m-d', strtotime($request->tanggal)))
             ->where('keterangan', 'tarik')
-            ->first();
+            ->count();
 
-        if ($existingTransaction) {
+        if ($existingTransactionsCount >= 2) {
             return redirect()->back()->withErrors([
-                'tanggal' => 'Tarik tunai hanya bisa dilakukan sekali dalam sehari untuk tabungan ini.',
+                'tanggal' => 'Tarik tunai hanya bisa dilakukan maksimal 2 kali dalam sehari untuk tabungan ini.',
             ])->withInput();
         }
 
@@ -126,16 +128,18 @@ class TabunganController extends Controller
                 'tabungan_id' => 'Tabungan tidak ditemukan.',
             ])->withInput();
         }
-    
+
         if ($tabungan->saldo < $request->nominal) {
             return redirect()->back()->withErrors([
                 'nominal' => 'Saldo tidak mencukupi untuk melakukan tarik tunai.',
             ])->withInput();
         }
-    
+
+        // Update saldo tabungan
         $tabungan->saldo -= $request->nominal;
         $tabungan->save();
 
+        // Simpan transaksi
         $transaksi = Transaksi::create([
             'tabungan_id' => $validated['tabungan_id'],
             'user_id' => $validated['user_id'],
@@ -143,6 +147,7 @@ class TabunganController extends Controller
             'nominal' => $validated['nominal'],
             'saldo' => $tabungan->saldo,
             'keterangan' => $validated['keterangan'],
+            'detail_penarikan' => $validated['detail_penarikan'],
             'kategori' => $validated['kategori'],
         ]);
 
@@ -154,9 +159,8 @@ class TabunganController extends Controller
         $validatedd = $request->validate([
             'kelas_id' => 'required|exists:kelas,id',
         ]);
-        
-        $kelas_id = $validatedd['kelas_id'];
 
+        $kelas_id = $validatedd['kelas_id'];
 
         if ($request->save == true) {
             return redirect()->route('tabungan.kelas', ['kelas' => $kelas_id])->with($notification);
@@ -165,6 +169,19 @@ class TabunganController extends Controller
         }
     }
 
-    
+    public function laporanKeseluruhan(){
+        $siswa = Siswa::with(['kelas', 'tabungan'])->get();
 
+        // Kelompokkan siswa berdasarkan kelas
+        $kelasData = $siswa->groupBy(function ($item) {
+            return $item->kelas?->nama_kelas ?? 'Tidak Ada Kelas';
+        });
+
+        $data = [
+            'title' => 'Data Tabungan Siswa Per Kelas',
+            'kelasData' => $kelasData,
+        ];
+
+        return view('laporan_keseluruhan.index', $data);
+    }
 }

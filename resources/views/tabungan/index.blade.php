@@ -5,7 +5,7 @@
         </h2>
     </x-slot>
 
-    <div class="py-12">
+    <div class="py-1">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -21,36 +21,36 @@
                 <br>
                 <x-table>
                     <x-slot name="header">
-                        <tr>
-                            <th>No</th>
-                            <th>NIS</th>
-                            <th>Nama Siswa</th>
-                            <th>Kelas</th>
-                            <th>Saldo</th>
-                            <th>Aksi</th>
-                        </tr>
+                        <th class="border-l border-transparent">No</th>
+                        <th>NIS</th>
+                        <th>Nama Siswa</th>
+                        <th>Kelas</th>
+                        <th>Saldo</th>
+                        <th class="border-r border-transparent">Aksi</th>
                     </x-slot>
                     @php $num=1 @endphp
                     @foreach ($kelas->siswa as $siswa)
                     <tr>
-                        <td>{{$num++}}</td>
+                        <td class="bg-[#F3F6FF]">{{$num++}}</td>
                         <td>{{ $siswa->nis }}</td>
-                        <td>{{ $siswa->nama }}</td>
+                        <td class="bg-[#F3F6FF]">{{ $siswa->nama }}</td>
                         <td>{{ $siswa->kelas->nama_kelas }}</td>
-                        <td>Rp.{{ number_format($siswa->tabungan->saldo, 0, ',', '.') }}</td>
+                        <td class="bg-[#F3F6FF]">Rp.{{ number_format($siswa->tabungan->saldo, 0, ',', '.') }}</td>
                         <td>
                         <x-primary-button 
                                 tag="a" 
                                 href="{{ route('tabungan.riwayat', [$kelas->id, $siswa->tabungan?->id]) }}">
-                                Riwayat
+                                Histori
                             </x-primary-button>
                         @if(auth()->user()->hasRole('admin'))
-                            <x-primary-button 
+                            <x-primary-button
+                                class="bg-blue-500" 
                                 tag="a" 
                                 href="{{ route('tabungan.setor', [$kelas->id, $siswa->tabungan?->id]) }}">
                                 Setor
                             </x-primary-button>
-                            <x-primary-button 
+                            <x-primary-button
+                                class="bg-red-500" 
                                 tag="a" 
                                 href="{{ route('tabungan.tarik', [$kelas->id, $siswa->tabungan?->id]) }}">
                                 Tarik

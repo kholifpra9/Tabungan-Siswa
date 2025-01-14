@@ -13,6 +13,7 @@ class Transaksi extends Model
         'nominal',
         'saldo',
         'kategori',
+        'detail_penarikan',
         'keterangan',
     ];
 

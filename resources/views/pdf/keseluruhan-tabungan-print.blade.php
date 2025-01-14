@@ -88,32 +88,37 @@
 
     <main>
         <div class="title">
-        <h3>{{ $title }}</h3>
-        <p><b>Tanggal:</b> {{ now()->translatedFormat('l, d F Y') }}</p>
+            <h3>{{ $title }}</h3>
+            <p><b>Tanggal:</b> {{ now()->translatedFormat('l, d F Y') }}</p>
         </div>
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>NIS</th>
-                    <th>Nama</th>
-                    <th>Kelas</th>
-                    <th>Saldo Tabungan</th>
-                </tr>
-            </thead>
-            <tbody>
-                @php $num=1; @endphp
-                @foreach($siswa as $s)
-                <tr>
-                    <td>{{ $num++ }}</td>
-                    <td>{{ $s->nis }}</td>
-                    <td>{{ $s->nama }}</td>
-                    <td>{{ $s->kelas?->nama_kelas ?? 'Tidak Ada Kelas' }}</td>
-                    <td>Rp.{{ number_format($s->tabungan?->saldo ?? 0, 0, ',', '.') }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-        </table>
+
+        @foreach($kelasData as $kelasNama => $siswaList)
+            <h4>Kelas: {{ $kelasNama }}</h4>
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>NIS</th>
+                        <th>Nama</th>
+                        <th>Kelas</th>
+                        <th>Saldo Tabungan</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @php $num = 1; @endphp
+                    @foreach($siswaList as $s)
+                    <tr>
+                        <td>{{ $num++ }}</td>
+                        <td>{{ $s->nis }}</td>
+                        <td>{{ $s->nama }}</td>
+                        <td>{{ $kelasNama }}</td>
+                        <td>Rp.{{ number_format($s->tabungan?->saldo ?? 0, 0, ',', '.') }}</td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
+            <br>
+        @endforeach
     </main>
 
     <footer>

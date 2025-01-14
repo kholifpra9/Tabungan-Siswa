@@ -40,7 +40,9 @@ Route::group(['middleware' => ['role:admin|kepala sekolah']], function () {
     Route::post('/kelola-tabungan/store-tarik', [TabunganController::class, 'store_tarik'])->name('tabungan.store_tarik');
 
     //print
+    Route::get('/Laporan-Keseluruhan', [TabunganController::class, 'laporanKeseluruhan'])->name('laporan.keseluruhan');
     Route::get('/siswas/prints', [PdfController::class, 'siswaPrint'])->name('pdf.siswaPrint');
+    Route::get('/keseluruhans/prints', [PdfController::class, 'keseluruhanPrint'])->name('pdf.keseluruhanPrint');
     Route::get('/siswas/prints/kelas/{kelas}', [PdfController::class, 'kelasPrint'])->name('pdf.kelasPrint');
     Route::get('/siswas/prints/perorang/{id}', [PdfController::class, 'riwayatPrint'])->name('pdf.riwayatPrint');
 

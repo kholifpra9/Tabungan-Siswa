@@ -2,26 +2,27 @@
     'header' => '',
 ])
 
-<div class="flex flex-col">
-  <div class="-m-1.5 overflow-x-auto">
-    <div class="p-1.5 min-w-full inline-block align-middle">
-      <div class="overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
-          <thead>
-            <tr>
-                {{ $header }}
-            </tr>
-          </thead>
-          <tbody>
-            {{ $slot }}
-          </tbody>
+<div class="bg-white dark:bg-dark py-1 lg:py-1">
+    <div class="max-w-full overflow-x-auto">
+        <table class="w-full table-auto">
+            <thead>
+                <tr class="text-center bg-green-500">
+                    {{ $header }}
+                </tr>
+            </thead>
+            <tbody>
+                {{ $slot }}
+            </tbody>
         </table>
-      </div>
     </div>
-  </div>
 </div>
 
 <script>
-    document.querySelectorAll('th').forEach(el=>el.classList.add("px-6", "py-3", "text-left", "text-xs", "font-medium", "textgray-500", "uppercase"));
-    document.querySelectorAll('td').forEach(el=>el.classList.add("px-6", "py-4", "whitespace-nowrap", "text-sm", "font-medium", "text-gray-800", "dark:text-gray-200"));
+    // Untuk menambahkan class tambahan ke elemen th dan td jika diperlukan
+    document.querySelectorAll('th').forEach(el => el.classList.add(
+        "py-4", "px-3", "text-lg", "font-medium", "text-white", "lg:py-7", "lg:px-4"
+    ));
+    document.querySelectorAll('td').forEach(el => el.classList.add(
+        "text-dark", "border-b", "border-[#E8E8E8]", "py-5", "px-2", "text-center", "text-base", "font-medium"
+    ));
 </script>

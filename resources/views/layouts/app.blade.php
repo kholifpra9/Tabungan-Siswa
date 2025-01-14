@@ -26,7 +26,7 @@
     <!-- Main Content -->
     <div class="flex-1 ml-64 p-4">
         <!-- Header -->
-        <header class="bg-white dark:bg-gray-800 shadow mb-4 p-4 rounded">
+        <header class="bg-green-300 dark:bg-gray-800 shadow mb-4 p-4 rounded">
             <div class="max-w-full">
                 <!-- Isi Header -->
                 @isset($header)

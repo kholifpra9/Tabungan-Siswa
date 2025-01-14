@@ -2,8 +2,8 @@
 @hasrole('admin|kepala sekolah')
 <div class="min-h-screen flex flex-col flex-auto flex-shrink-0 antialiased bg-gray-50 text-gray-800">
   <div class="fixed flex flex-col top-0 left-0 w-64 bg-white h-full border-r">
-    <div class="flex items-center justify-center h-14 border-b">
-        <x-application-logo class="block h-9 w-auto fill-current text-green-600 dark:text-gray-200" />
+    <div class="flex items-center justify-center h-40 border-b">
+        <x-application-logo class="block h-20 w-auto fill-current text-green-600 dark:text-gray-200" />
         <br>
     </div>
     <!-- Pastikan bagian ini menggunakan flex-grow flex flex-col -->
@@ -80,10 +80,15 @@
                 @endforelse
             </ul>
         </li>
-
-  <br>
-  <br>
-  <br><br>
+        <li> 
+          <x-nav-link :href="route('laporan.keseluruhan')" :active="request()->routeIs('laporan.keseluruhan')" class="relative flex flex-row items-center h-11 focus:outline-none hover:bg-gray-50 text-gray-600 hover:text-gray-800 border-l-4 border-transparent hover:border-indigo-500 pr-6">
+            <span class="inline-flex justify-center items-center ml-4">
+                <svg class="w-5 h-5" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>report-linechart</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="add" fill="#000000" transform="translate(42.666667, 85.333333)"> <path d="M341.333333,1.42108547e-14 L426.666667,85.3333333 L426.666667,341.333333 L3.55271368e-14,341.333333 L3.55271368e-14,1.42108547e-14 L341.333333,1.42108547e-14 Z M330.666667,42.6666667 L42.6666667,42.6666667 L42.6666667,298.666667 L384,298.666667 L384,96 L330.666667,42.6666667 Z M106.666667,85.3333333 L106.666333,217.591333 L167.724208,141.269742 L232.938667,173.866667 L280.864376,130.738196 L295.135624,146.595138 L236.398693,199.458376 L173.589333,168.064 L120.324333,234.666333 L341.333333,234.666667 L341.333333,256 L85.3333333,256 L85.3333333,85.3333333 L106.666667,85.3333333 Z" id="Combined-Shape"> </path> </g> </g> </g></svg>
+            </span>
+            <span class="ml-2 text-sm tracking-wide truncate">Laporan Keseluruhan</span>
+          </x-nav-link>
+        </li>
+        <br>
         <li class="mt-auto">
           <form method="POST" action="{{ route('logout') }}">
             @csrf
@@ -124,8 +129,7 @@
                         {{ __('Dashboard Siswa') }}
                     </x-nav-link>
                 </div>
-               
-                
+
             </div>
 
             <!-- Settings Dropdown -->

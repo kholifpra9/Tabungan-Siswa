@@ -19,6 +19,7 @@ return new class extends Migration
             $table->double('nominal');
             $table->double('saldo');
             $table->string('kategori')->nullable();
+            $table->string('detail_penarikan')->nullable();
             $table->enum('keterangan', ['setor', 'tarik']);
         });
     }

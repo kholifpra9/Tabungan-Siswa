@@ -1,13 +1,16 @@
 <x-app-layout>
+    @if(auth()->user()->hasRole('siswa'))
+    @else
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Dashboard') }}
         </h2>
     </x-slot>
+    @endif
 
     <div class="py-2">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+            <div class="bg-blue-300 dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("Halo Selamat Datang") }}
                     {{ Auth::user()->name }}!
@@ -97,7 +100,7 @@
                             <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
                                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                                     <div class="p-6 text-gray-900 dark:text-gray-100">
-                                    <h5 class="text-xl font-bold dark:text-white">Riwayat Menabung</h5>
+                                    <h5 class="text-xl font-bold dark:text-white">Histori Menabung</h5>
                                     <hr class="mb-3">
                                     <x-primary-button 
                                         tag="a" 
@@ -108,24 +111,24 @@
                                     <br>
                                     <x-table>
                                         <x-slot name="header">
-                                            <tr>
-                                                <th>No</th>
-                                                <th>Tanggal</th>
-                                                <th>Keterangan</th>
-                                                <th>Nominal</th>
-                                                <th>Saldo</th>
-                                                <th>Pencatat</th>
-                                            </tr>
+                                            <th>No</th>
+                                            <th>Tanggal</th>
+                                            <th>Keterangan</th>
+                                            <th>Detail</th>
+                                            <th>Nominal</th>
+                                            <th>Saldo</th>
+                                            <th>Pencatat</th>
                                         </x-slot>
                                         @php $num=1 @endphp
                                         @foreach ($transaksis as $t)
                                         <tr>
-                                            <td>{{$num++}}</td>
+                                            <td class="bg-[#F3F6FF]">{{$num++}}</td>
                                             <td>{{ $t->tanggal }}</td>
-                                            <td>{{ $t->keterangan }}</td>
-                                            <td>Rp.{{ number_format($t->nominal, 0, ',', '.') }}</td>
+                                            <td class="bg-[#F3F6FF]">{{ $t->keterangan }}</td>
+                                            <td>{{ !empty($t->kategori) ? $t->kategori : '-' }} ({{ !empty($t->detail_penarikan) ? $t->detail_penarikan : '-' }})</td>
+                                            <td class="bg-[#F3F6FF]">Rp.{{ number_format($t->nominal, 0, ',', '.') }}</td>
                                             <td>Rp.{{ number_format($t->saldo, 0, ',', '.') }}</td>
-                                            <td>{{ $t->user->name }}</td>
+                                            <td  class="bg-[#F3F6FF]">{{ $t->user->name }}</td>
                                         </tr>
                                         @endforeach
                                     </x-table>
